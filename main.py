@@ -1,88 +1,75 @@
-heladoos = []  # Lista para almacenar los helados
-contadore_id = 1  # Contador para asignar IDs únicos
+import random
 
-while True:
-    print("\nGestión de Helados")
-    print("1. Agregar un helado")
-    print("2. Ver lista de helados")
-    print("3. Modificar un helado")
-    print("4. Eliminar un helado")
-    print("5. Salir")
+helados = []  # Lista vacia para almacenar los helados
+
+print("-------HELADOS LOS MEJORES--------")
+print("1.INGRESE UN HELADO A LA LISTA")
+print("2.VERIFICAR LISTA DE HELADOS")
+print("3.EDITAR LISTA DE HELADOS")
+print("4.ELIMINAR HELADO POR SU ID")
+print("5.SALIR")
+
+
+opcion = 0
+while opcion !=5:
+    opcion = int(input("Seleccione una opción: "))
+    if opcion == 1:
+        print("\nIngrese un helado a la lista")
+        helado = {
+             "id": random.randint(1, 30),
+             "nombre": input("Digita el nombre del helado: "),
+             "descripcion": input("Ingresa la descripcion del helado: "),
+             "precio": int(input("Ingrese el precio del helado: "))
+        }
+
+    # Agregar un helado
+        helados.append(helado)
+        print("\nHelado ingresdo con exito")
+        print("Lista de helados: ", helado)
     
-    opcion = input("Seleccione una opción: ")
+    # Ver lista de helados
+    elif opcion == 2:
+         print("\nLista de Helados:")
+         if helados: 
+            for heladoseleccionado in helados:
+                print(f"ID: {heladoseleccionado['id']} - Nombre: {heladoseleccionado['nombre']} - Descripcion: {heladoseleccionado['descripcion']} - Precio: {heladoseleccionado['precio']}")
+         else:
+            print("No hay helados en la lista")
     
-    if opcion == "1":  # Agregar un helado
-        nombre = input("Ingrese el nombre del helado: ")
-        descripcion = input("Ingrese la descripción del helado: ")
-        precioo = input("Ingrese el precio del helado: ")
-        
-    if precioo.isdigit():
-            precio = float(precio)  # Error: variable mal escrita
-            heladoo = {"id": contadore_id, "nombre": nombre, "descripcion": descripcion, "precio": precio}
-            heladoos.append(haledo)  # Error: variable mal escrita
-            contadore_id += 1
-            print("Helado agregado correctamente.")
-                    else:
-            print("Error: El precio debe ser un número.")
-    
-    elif opcion == "2":  # Ver lista de helados
-        if len(helados) == 0:  # Error: variable incorrecta
-            print("No hay helados registrados.")
+    # Modificar un helado
+    elif opcion == 3:
+        print("\nModificar un helado")
+        heladocambio = int(input("Digita el id del helado que deseas modificar: "))
+         
+        #buscar el helado por el id
+        for heladobuscado in helados:
+            if heladobuscado["id"] == heladocambio:
+                print("Helado encontrado: ", heladobuscado)
+
+                #permitir editar valores
+                heladobuscado["nombre"] = input("Ingrese el nuevo nombre: ")
+                heladobuscado["descripcion"] = input("Ingrese una nueva descripcion: ")
+                heladobuscado["precio"] = input("Ingrese un nuevo precio: ")
+                print("Helado actualizado con exito: ")
+                break
         else:
-            print("\nLista de Helados:")
-            for helado in heladoos:
-                print("ID: {helado['iD']}, Nombre: {helado['nombre']}, Descripción: {helado['descripsion']}, Precio: ${helado['precio']}")  # Error en claves del diccionario
-    
-    elif opcion == "3":  # Modificar un helado
-        id_modificar = input("Ingrese el ID del helado a modificar: ")
+             print("NO se encontro un helado con ese id")   
+              
+        # Eliminar un helado
+    elif opcion == 4:  
+         print("\nEliminar helado de la vista: ")
+         heladoid = int(input("Digita el id del helado que desea eliminar: "))
+         
+         for helado in helados:
+             if helado["id"] == heladoid:
+                 helados.remove(helado)
+                 print("Helado eliminado con exito")
+                 break
+         else:
+              print("No se encontro un helado con ese id")    
         
-        if id_modificar.isdigit():
-            id_modificar = int(id_modificar)
-            encontrado = False
-            
-            for helado in heladoos:
-            if helado["id"] == id_modificar:
-                    nuevo_nombre == input("Nuevo nombre (deje en blanco para no cambiar): ")  # Error: doble signo igual
-                    nueva_descripcion = input("Nueva descripción (deje en blanco para no cambiar): ")
-                    nuevo_precio = input("Nuevo precio (deje en blanco para no cambiar): ")
-                    
-                    if nuevo_nombre:
-                        helado["nombre"] = nuevo_nombre
-                    if nueva_descripcion:
-                        helado["descripcion"] = nueva_descripcion
-                    if nuevo_precio.isdigit():
-                        helado["precio"] = float(nuevo_precio)
-                    
-                    print("Helado modificado correctamente.")
-                    encontrado = True
-                    break
-            
-            if not encontrado:
-                print("Error: No se encontró un helado con ese ID.")
-        else:
-            print("Error: El ID debe ser un número.")
-    
-    elif opcion == "4":  # Eliminar un helado
-        id_eliminar = input("Ingrese el ID del helado a eliminar: ")
-        
-        if id_eliminar.isdigit():
-            id_eliminar = int(id_eliminar)
-            encontrado = False
-            
-            for helado in heladoos:
-                if helado["id"] == id_eliminar:
-                    heladoos.remove(heladoo)  # Error: variable incorrecta
-                    print("Helado eliminado correctamente.")
-                    encontrado = True
-                    break
-            
-            if not encontrado:
-                print("Error: No se encontró un helado con ese ID.")
-        else:
-            print("Error: El ID debe ser un número.")
-    
-    elif opcion == "5":  # Salir
-        print("Saliendo del programa...")
-        break
-                else:
+          # Salir
+    elif opcion == 5:
+        print("Saliendo del programa...")  
+    else:
         print("Opción inválida, intente nuevamente.")
